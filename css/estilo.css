@@ -1,0 +1,36 @@
+.error {
+	color: red;
+	font-size: 14px; 
+}
+
+#titulo {
+	border-bottom: 10px solid #dc3545;;	
+}
+
+#subTitulo {
+	border-bottom: 2px solid #dc3545;;	
+}
+
+.fotoPessoaTabela{
+	border-radius: 50%;	
+	width: 30px;
+	height: 30px;
+}
+
+.fotoLogo{
+	border-radius: 20%;	
+	width: 30%;
+	height: 150px;
+	margin-left: 35%;
+	margin-right: 35%;
+
+}
+
+.cabecalhoMenu {
+	border-bottom: 10px solid #dc3545;
+}
+
+table{
+  overflow: scroll;   /* Sempre aparece a barra de rolagem */
+  overflow: auto;     /* Automaticamente verifica se precisa da barra */
+}
