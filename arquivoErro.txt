@@ -1,3 +1,0 @@
-Data: 01/12/2020 23:38:23 
-	 Arquivo: /opt/lampp/htdocs/pw2/atv09/projeto-web/historicoBiblioteca.php - Linha: 26 
-	 Erro: SQLSTATE[HY000]: General error: 1364 Field 'idHistorico' doesn't have a default value 
