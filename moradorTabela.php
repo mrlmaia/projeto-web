@@ -50,7 +50,7 @@ $moradores = listarMorador();
 
           <td>
             <a class='btn btn-info float-right' target="_blank" href='saldoRelatorio.php?idMorador=<?php echo $morador['idMorador'] ?>'>
-              Baixar Saldo
+              Ver saldo
             </a>
             <a class='btn btn-warning float-right mr-1' href='moradorFormulario.php?idMorador=<?php echo $morador['idMorador'] ?>'>
               Editar
