@@ -1,0 +1,23 @@
+.titulo {
+	color: cadetblue;
+	text-align: center;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#total {
+  /* margin-left: 20%; */
+  text-align: left;
+}
+
+.tabela {
+  width: 100%;
+}
+
+.tabela th {
+	text-align: left;
+}
+

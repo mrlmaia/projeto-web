@@ -40,20 +40,27 @@ $moradores = listarMorador();
           $imagem = $morador['foto'];
           echo "<tr>";
           echo "<td>
-                                    <img class='rounded-circle' width='50' height='50' src='$imagem'</img>
-                                  </td>";
+            <img class='rounded-circle' width='50' height='50' src='$imagem'</img>
+          </td>";
           echo "<td>{$morador['nome']}</td>";
           echo "<td>{$morador['CPF']}</td>";
           echo "<td>{$morador['email']}</td>";
           echo "<td>{$morador['celular']}</td>";
+        ?>
 
-          echo "<td><a class='btn btn-warning float-right'
-							             href='moradorFormulario.php?idMorador={$morador['idMorador']}'>
-										 Editar</a>";
-          echo "<a class='btn btn-danger float-right mx-1'
-							             href='moradorExcluir.php?idMorador={$morador['idMorador']}'>
-										 Excluir</a></td>";
-          echo "</tr>";
+          <td>
+            <a class='btn btn-info float-right' target="_blank" href='saldoRelatorio.php?idMorador=<?php echo $morador['idMorador'] ?>'>
+              Baixar Saldo
+            </a>
+            <a class='btn btn-warning float-right mr-1' href='moradorFormulario.php?idMorador=<?php echo $morador['idMorador'] ?>'>
+              Editar
+            </a>
+            <a class='btn btn-danger float-right mx-1' href='moradorExcluir.php?idMorador=<?php echo $morador['idMorador'] ?>'>
+              Excluir
+            </a>
+          </td>
+          </tr>
+        <?php
         }
         ?>
       </tbody>

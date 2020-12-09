@@ -17,19 +17,13 @@ if (isset($_SESSION['usuario'])) {
       <span class="navbar-toggler-icon"></span>
     </button>
     <ul class="navbar-nav mr-auto">
-      <li class="nav-item <?php if ($pagina == 'morador') {
-                            echo 'active';
-                          } ?>">
+      <li class="nav-item <?php if ($pagina == 'morador') echo 'active'; ?>">
         <a class="nav-link" href="moradorTabela.php">Morador</a>
       </li>
-      <li class="nav-item <?php if ($pagina == 'tipo') {
-                            echo 'active';
-                          } ?>">
+      <li class="nav-item <?php if ($pagina == 'tipo') echo 'active' ?>">
         <a class="nav-link" href="tipoTabela.php">Tipo</a>
       </li>
-      <li class="nav-item <?php if ($pagina == 'conta') {
-                            echo 'active';
-                          } ?>">
+      <li class="nav-item <?php if ($pagina == 'conta') echo 'active' ?>">
         <a class="nav-link" href="contaTabela.php">Conta</a>
       </li>
     </ul>
