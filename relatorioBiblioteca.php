@@ -50,3 +50,31 @@ function _gerarTotal($id, $conexao)
     criarArquivo($erro);
   }
 }
+
+function gerarExtratoContaTipo($inicio, $termino, String $idTipo = null)
+{
+  try {
+    $conexao = criarConexao();
+
+    $sql = "SELECT descricao, nome as tipo, dataVencimento as vencimento, valor FROM tbConta tc
+    inner join tbTipo tt on tt.idTipo = tc.idTipo
+    where dataVencimento BETWEEN :inicio and :termino";
+
+    $sql = $idTipo == null ? $sql . ";" : $sql . " and tt.idTipo = :idTipo" . ";";
+
+    $resultado = $conexao->prepare($sql);
+
+    $resultado->bindValue(':inicio', $inicio);
+    $resultado->bindValue(':termino', $termino);
+
+    if ($idTipo != null) $resultado->bindValue(':idTipo', $idTipo);
+
+    $resultado->execute();
+
+    $contasTipo = $resultado->fetchAll();
+
+    return $contasTipo;
+  } catch (PDOException $erro) {
+    criarArquivo($erro);
+  }
+}

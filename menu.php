@@ -26,6 +26,9 @@ if (isset($_SESSION['usuario'])) {
       <li class="nav-item <?php if ($pagina == 'conta') echo 'active' ?>">
         <a class="nav-link" href="contaTabela.php">Conta</a>
       </li>
+      <li class="nav-item <?php if ($pagina == 'extrato') echo 'active' ?>">
+        <a class="nav-link" href="extratoFormulario.php">Relatório</a>
+      </li>
     </ul>
     <div class="form-inline my-2 my-lg-0">
       <label class="text-light  mr-sm-2">Tempo de Sessão: </label>

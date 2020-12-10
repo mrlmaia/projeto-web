@@ -2,7 +2,7 @@
 // ob_start();
 
 require_once "mpdf/mpdf.php";
-require_once('saldoBiblioteca.php');
+require_once('relatorioBiblioteca.php');
 require_once('moradorBiblioteca.php');
 
 $idMorador = $_GET['idMorador'];

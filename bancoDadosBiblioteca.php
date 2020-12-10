@@ -27,7 +27,7 @@ function criarArquivo($erro)
   echo "<script>alert('Ocorreu um erro durante a execução do sistema');</script>";
   date_default_timezone_set('America/Sao_Paulo');
   $dataErro = date('d/m/Y H:i:s');
-  $arquivo = fopen('arquivoErro.txt', 'a+');
+  $arquivo = fopen('log.txt', 'a+');
   $texto = "Data: {$dataErro} \n";
   $texto = $texto . "\t Arquivo: {$erro->getFile()} - Linha: {$erro->getLine()} \n";
   $texto = $texto . "\t Erro: {$erro->getMessage()} \n";
