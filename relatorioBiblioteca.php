@@ -78,3 +78,41 @@ function gerarExtratoContaTipo($inicio, $termino, String $idTipo = null)
     criarArquivo($erro);
   }
 }
+
+function emitirExtratoMoradorPago($idMorador, $idTipo, $dataInicial, $dataFinal)
+{
+  try {
+    $sql = "SELECT SUM(tr.valor) pago FROM tbConta tc INNER JOIN tbTipo tt on tt.idTipo = tc.idTipo INNER JOIN tbRateio tr ON tr.idConta = tc.idConta INNER JOIN tbMorador tm on tr.idMorador = tm.idMorador where tr.situacao = 1 AND tm.idMorador = :idMorador and tc.dataVencimento BETWEEN :dataInicial AND :dataFinal AND tt.idTipo = :idTipo";
+    $conexao = criarConexao();
+    $resultado = $conexao->prepare($sql);
+    $resultado->bindValue(':idTipo', $idTipo);
+    $resultado->bindValue(':dataInicial', $dataInicial);
+    $resultado->bindValue(':idMorador', $idMorador);
+    $resultado->bindValue(':dataFinal', $dataFinal);
+    $resultado->execute();
+    $registro = $resultado->fetch();
+    fecharConexao($conexao);
+  } catch (PDOException $erro) {
+    criarArquivo($erro);
+  }
+  return $registro;
+}
+
+function emitirExtratoMoradorDebito($idMorador, $idTipo, $dataInicial, $dataFinal)
+{
+  try {
+    $sql = "SELECT SUM(tr.valor) debito FROM tbConta tc INNER JOIN tbTipo tt on tt.idTipo = tc.idTipo INNER JOIN tbRateio tr ON tr.idConta = tc.idConta INNER JOIN tbMorador tm on tr.idMorador = tm.idMorador where tr.situacao = 2 AND tm.idMorador = :idMorador and tc.dataVencimento BETWEEN :dataInicial AND :dataFinal AND tt.idTipo = :idTipo";
+    $conexao = criarConexao();
+    $resultado = $conexao->prepare($sql);
+    $resultado->bindValue(':idTipo', $idTipo);
+    $resultado->bindValue(':dataInicial', $dataInicial);
+    $resultado->bindValue(':idMorador', $idMorador);
+    $resultado->bindValue(':dataFinal', $dataFinal);
+    $resultado->execute();
+    $registro = $resultado->fetch();
+    fecharConexao($conexao);
+  } catch (PDOException $erro) {
+    criarArquivo($erro);
+  }
+  return $registro;
+}
