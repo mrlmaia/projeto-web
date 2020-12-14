@@ -228,3 +228,29 @@ function listarGastosPorMorador($inicio, $fim)
     criarArquivo($erro);
   }
 }
+
+function listarContasPorPeriodo($inicio, $fim)
+{
+  try {
+    $conexao = criarConexao();
+
+    $sql = "SELECT descricao, tt.nome as tipo, tm.nome as responsavel, dataVencimento as vencimento, estado, tc.valor
+    from tbConta tc inner join tbTipo tt on tc.idTipo = tt.idTipo
+    inner join tbMorador tm on tc.idMoradorResponsavel = tm.idMorador
+    where tc.dataVencimento BETWEEN :inicio and :fim
+    and tc.estado = 1;
+    ";
+
+    $resultado = $conexao->prepare($sql);
+    $resultado->bindValue(':inicio', $inicio);
+    $resultado->bindValue(':fim', $fim);
+    $resultado->execute();
+
+    $registro = $resultado->fetchAll();
+    fecharConexao($conexao);
+
+    return $registro;
+  } catch (PDOException $erro) {
+    criarArquivo($erro);
+  }
+}
