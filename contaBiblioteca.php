@@ -175,3 +175,56 @@ function alterarEstadoConta($idConta, $estado)
   }
   return $situacao;
 }
+
+function listarGastosPorPeriodo($inicio, $fim)
+{
+  try {
+    $conexao = criarConexao();
+
+    $sql = "SELECT tt.nome as tipos, sum(tc.valor) as gastos
+    from tbConta tc inner join tbTipo tt on tc.idTipo = tt.idTipo
+    where tc.dataVencimento BETWEEN :inicio and :fim
+    GROUP BY tt.idTipo
+    order by tt.nome ;
+    ";
+
+    $resultado = $conexao->prepare($sql);
+    $resultado->bindValue(':inicio', $inicio);
+    $resultado->bindValue(':fim', $fim);
+    $resultado->execute();
+
+    $registro = $resultado->fetchAll();
+    fecharConexao($conexao);
+
+    return $registro;
+  } catch (PDOException $erro) {
+    criarArquivo($erro);
+  }
+}
+
+function listarGastosPorMorador($inicio, $fim)
+{
+  try {
+    $conexao = criarConexao();
+
+    $sql = "SELECT tm.nome as moradores, sum(tc.valor) as gastos
+    from tbConta tc inner join tbTipo tt on tc.idTipo = tt.idTipo
+    inner join tbMorador tm on tm.idMorador = tc.idMoradorResponsavel
+    where tc.dataVencimento BETWEEN :inicio and :fim
+    GROUP BY tm.idMorador
+    order by tm.nome ;
+    ";
+
+    $resultado = $conexao->prepare($sql);
+    $resultado->bindValue(':inicio', $inicio);
+    $resultado->bindValue(':fim', $fim);
+    $resultado->execute();
+
+    $registro = $resultado->fetchAll();
+    fecharConexao($conexao);
+
+    return $registro;
+  } catch (PDOException $erro) {
+    criarArquivo($erro);
+  }
+}
