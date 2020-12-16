@@ -207,13 +207,11 @@ function listarGastosPorMorador($inicio, $fim)
   try {
     $conexao = criarConexao();
 
-    $sql = "SELECT tm.nome as moradores, sum(tc.valor) as gastos
-    from tbConta tc inner join tbTipo tt on tc.idTipo = tt.idTipo
-    inner join tbMorador tm on tm.idMorador = tc.idMoradorResponsavel
-    where tc.dataVencimento BETWEEN :inicio and :fim
-    GROUP BY tm.idMorador
-    order by tm.nome ;
-    ";
+    $sql = "SELECT tm.nome as moradores, sum(tr.valor) as gastos
+      from tbRateio tr inner join tbMorador tm on tr.idMorador = tm.idMorador
+      inner join tbConta tc on tr.idConta = tc.idConta
+      where dataVencimento BETWEEN :inicio and :fim
+      group by tm.nome;";
 
     $resultado = $conexao->prepare($sql);
     $resultado->bindValue(':inicio', $inicio);
