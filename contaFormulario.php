@@ -135,17 +135,11 @@ if (isset($_GET["idConta"])) {
           <select class="form-control" name="estado" id="estado">
             <?php
             if ($estado == 0) {
-              echo "<option disabled selected value=''>Selecione um estado da conta</option>";
-              echo "<option value='1'>Aberta</option>";
-              echo "<option value='2'>Fechada</option>";
+              echo "<option selected value='0'>Aberta</option>";
+              echo "<option value='1'>Fechada</option>";
             } else {
-              if ($estado == 1) {
-                echo "<option selected value='1'>Aberta</option>";
-                echo "<option value='2'>Fechada</option>";
-              } else {
-                echo "<option selected value='2'>Fechada</option>";
-                echo "<option value='1'>Aberta</option>";
-              }
+              echo "<option selected value='1'>Fechada</option>";
+              echo "<option value='0'>Aberta</option>";
             }
             ?>
 

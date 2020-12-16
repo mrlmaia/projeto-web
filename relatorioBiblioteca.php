@@ -8,7 +8,7 @@ function gerarSaldo($idMorador)
 
     $sql = "SELECT tc.descricao, tt.nome as tipo ,tc.valor, tc.dataVencimento, tr.valor as valorRateio
     FROM tbRateio tr inner join tbConta tc on tc.idConta = tr.idConta
-    inner join tbTipo tt on tt.idTipo = tc.idTipo where tr.idMorador = :idMorador and tr.situacao = 2;";
+    inner join tbTipo tt on tt.idTipo = tc.idTipo where tr.idMorador = :idMorador and tr.situacao = 0;";
 
     $resultado = $conexao->prepare($sql);
     $resultado->bindValue(':idMorador', $idMorador);
@@ -37,7 +37,7 @@ function _gerarTotal($id, $conexao)
   try {
     // $conexao = criarConexao();
 
-    $sql = "SELECT sum(tr.valor) as total FROM tbRateio tr inner join tbConta tc on tc.idConta = tr.idConta where tr.idMorador = :id and tr.situacao = 2;";
+    $sql = "SELECT sum(tr.valor) as total FROM tbRateio tr inner join tbConta tc on tc.idConta = tr.idConta where tr.idMorador = :id and tr.situacao = 0;";
     $resultado = $conexao->prepare($sql);
     $resultado->bindValue(':id', $id);
 
@@ -101,7 +101,7 @@ function emitirExtratoMoradorPago($idMorador, $idTipo, $dataInicial, $dataFinal)
 function emitirExtratoMoradorDebito($idMorador, $idTipo, $dataInicial, $dataFinal)
 {
   try {
-    $sql = "SELECT SUM(tr.valor) debito FROM tbConta tc INNER JOIN tbTipo tt on tt.idTipo = tc.idTipo INNER JOIN tbRateio tr ON tr.idConta = tc.idConta INNER JOIN tbMorador tm on tr.idMorador = tm.idMorador where tr.situacao = 2 AND tm.idMorador = :idMorador and tc.dataVencimento BETWEEN :dataInicial AND :dataFinal AND tt.idTipo = :idTipo";
+    $sql = "SELECT SUM(tr.valor) debito FROM tbConta tc INNER JOIN tbTipo tt on tt.idTipo = tc.idTipo INNER JOIN tbRateio tr ON tr.idConta = tc.idConta INNER JOIN tbMorador tm on tr.idMorador = tm.idMorador where tr.situacao = 0 AND tm.idMorador = :idMorador and tc.dataVencimento BETWEEN :dataInicial AND :dataFinal AND tt.idTipo = :idTipo";
     $conexao = criarConexao();
     $resultado = $conexao->prepare($sql);
     $resultado->bindValue(':idTipo', $idTipo);

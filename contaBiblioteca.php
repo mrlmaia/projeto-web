@@ -150,7 +150,7 @@ function alterarEstadoConta($idConta, $estado)
     $conexao = criarConexao();
 
     if ($estado == 1) {
-      $novoEstado = 2;
+      $novoEstado = 0;
       $sql = "UPDATE tbConta SET estado = :estado WHERE idConta = :idConta;";
       $resultado = $conexao->prepare($sql);
       $resultado->bindValue(':estado', $novoEstado);
